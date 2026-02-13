@@ -2,7 +2,7 @@
   <img src="./img.png" alt="Project Banner" width="100%">
 </p>
 
-# RAKSHA – Intelligent Guardian 🎯
+# RAKSHA – The Intelligent Guardian 🎯
 
 ## Basic Details
 
@@ -16,10 +16,27 @@
 [mention your project hosted link here]
 
 ### Project Description
-[2-3 lines about what your project does]
+Raksha is a sensor-driven mobile safety application designed to protect women in real-time using just a smartphone. It combines psychological deterrence, instant emergency alerting, and automated location sharing through gesture-based triggers.
+
+Raksha transforms a regular phone into an intelligent guardian!
 
 ### The Problem statement
-[What problem are you solving?]
+Women frequently share live locations out of fear, not convenience.
+
+Existing safety solutions:
+
+Require unlocking the phone
+
+Depend on manual button presses
+
+Use unreliable SMS systems
+
+Provide no deterrence or evidence
+
+In high-stress situations, fine motor skills degrade, making small panic buttons ineffective.
+
+There is a need for a fast, discreet, intelligent safety mechanism that works instinctively.
+
 
 ### The Solution
 [How are you solving it?]
