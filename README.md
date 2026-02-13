@@ -18,6 +18,8 @@
 ### Project Description
 Raksha is a sensor-driven mobile safety application designed to protect women in real-time using just a smartphone. It combines psychological deterrence, instant emergency alerting, and automated location sharing through gesture-based triggers.
 
+Raksha resides on the device the user already protects: her phone.
+
 Raksha transforms a regular phone into an intelligent guardian!
 
 ### The Problem statement
@@ -37,10 +39,19 @@ In high-stress situations, fine motor skills degrade, making small panic buttons
 
 There is a need for a fast, discreet, intelligent safety mechanism that works instinctively.
 
+Prevention is better than Cure; Evidence is better than Hearsay.
+
 
 ### The Solution
-[How are you solving it?]
+Raksha uses built-in smartphone sensors (Accelerometer + GPS + Audio system) to:
 
+Detect a panic shake gesture
+
+Trigger an authoritative deterrent audio
+
+Automatically generate and send a WhatsApp SOS with live location
+
+Instead of reacting after violence begins, Raksha creates perceived surveillance and immediate response.
 ---
 
 ## Technical Details
@@ -48,26 +59,32 @@ There is a need for a fast, discreet, intelligent safety mechanism that works in
 ### Technologies/Components Used
 
 **For Software:**
-- Languages used: [e.g., JavaScript, Python, Java]
-- Frameworks used: [e.g., React, Django, Spring Boot]
-- Libraries used: [e.g., axios, pandas, JUnit]
-- Tools used: [e.g., VS Code, Git, Docker]
+- Languages used: JavaScript
+- Frameworks used: React Native (Expo)
+- Libraries used:
+  expo-sensors (Accelerometer access)
+
+  expo-location (GPS retrieval)
+
+  expo-av (Audio playback)
+  
+- Tools used: VS Code ,Git & GitHub, Expo Go, Android Device for Testing
 
 **For Hardware:**
-- Main components: [List main components]
-- Specifications: [Technical specifications]
-- Tools required: [List tools needed]
-
+None.
+Raksha is a software-first safety solution that leverages built-in smartphone sensors.
 ---
 
 ## Features
 
-List the key features of your project:
-- Feature 1: [Description]
-- Feature 2: [Description]
-- Feature 3: [Description]
-- Feature 4: [Description]
-
+- Feature 1: Shake-to-Trigger Deterrence
+  Double shake gesture activates emergency protocol instantly.
+- Feature 2: Indian Dad Protocol
+  Plays a loud authoritative pre-recorded voice message to simulate live tracking and immediate guardian presence.
+- Feature 3: WhatsApp SOS with Live Location
+  Automatically opens WhatsApp with pre-filled emergency message including Google Maps link.
+- Feature 4: Dark Cockpit Panic UI
+  Panic-optimized interface with large trigger zones and high-visibility emergency state.
 ---
 
 ## Implementation
@@ -75,22 +92,16 @@ List the key features of your project:
 ### For Software:
 
 #### Installation
-```bash
-[Installation commands - e.g., npm install, pip install -r requirements.txt]
-```
+
+npx create-expo-app raksha
+cd raksha
+npm install
+npm install expo-sensors expo-location expo-av
+
 
 #### Run
-```bash
-[Run commands - e.g., npm start, python app.py]
-```
 
-### For Hardware:
-
-#### Components Required
-[List all components needed with specifications]
-
-#### Circuit Setup
-[Explain how to set up the circuit]
+npx expo start
 
 ---
 
@@ -114,7 +125,15 @@ List the key features of your project:
 **System Architecture:**
 
 ![Architecture Diagram](docs/architecture.png)
-*Explain your system architecture - components, data flow, tech stack interaction*
+
+User Gesture
+→ Accelerometer Listener (expo-sensors)
+→ Trigger Engine
+→ Audio Playback (expo-av)
+→ Location Fetch (expo-location)
+→ WhatsApp Deep Link
+
+All logic runs locally on device. No backend required.
 
 **Application Workflow:**
 
