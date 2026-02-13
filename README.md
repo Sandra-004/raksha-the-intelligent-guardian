@@ -124,7 +124,7 @@ npx expo start
 
 **System Architecture:**
 
-![Architecture Diagram](docs/architecture.png)
+![Architecture Diagram](https://i.ibb.co/fYXC1Z7W/architecture.png)
 
 User Gesture
 → Accelerometer Listener (expo-sensors)
