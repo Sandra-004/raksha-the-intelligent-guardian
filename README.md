@@ -6,11 +6,11 @@
 
 ## Basic Details
 
-### Team Name: [Name]
+### Team Name: Yatna
 
 ### Team Members
-- Member 1: [Name] - [College]
-- Member 2: [Name] - [College]
+- Member 1: Sandra Suresh Panicker - NSS College of Engineering, Palakkad
+- Member 2: Kavya S Nair - NSS College of Engineering, Palakkad
 
 ### Hosted Project Link
 [mention your project hosted link here]
