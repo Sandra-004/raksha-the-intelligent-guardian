@@ -36,7 +36,7 @@ export default function FakeCallPopup({ visible, onSelectStalking, onSelectCab, 
                         </View>
                         <View style={styles.optionInfo}>
                             <Text style={styles.optionLabel}>Cab Safety</Text>
-                            <Text style={styles.optionDesc}>Guided call with Mom</Text>
+                            <Text style={styles.optionDesc}>Guided call with Dad</Text>
                         </View>
                         <Ionicons name="chevron-forward" size={18} color={COLORS.TEXT_MUTED} />
                     </TouchableOpacity>

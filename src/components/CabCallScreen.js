@@ -1,5 +1,5 @@
 // Raksha — Cab Call Screen
-// Active call with subtitle display for cab conversation
+// Active call with timed subtitle display
 
 import React, { useEffect, useState, useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
@@ -11,6 +11,7 @@ export default function CabCallScreen({ visible, dialogueData = [], onEndCall })
     const [callDuration, setCallDuration] = useState(0);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [gapCountdown, setGapCountdown] = useState(0);
+    const [totalGapSeconds, setTotalGapSeconds] = useState(0);
     const timerRef = useRef(null);
     const dialogueTimerRef = useRef(null);
     const gapTimerRef = useRef(null);
@@ -20,6 +21,7 @@ export default function CabCallScreen({ visible, dialogueData = [], onEndCall })
             setCallDuration(0);
             setCurrentIndex(0);
             setGapCountdown(0);
+            setTotalGapSeconds(0);
             return;
         }
 
@@ -37,17 +39,29 @@ export default function CabCallScreen({ visible, dialogueData = [], onEndCall })
     }, [visible]);
 
     const startDialogueAt = (index) => {
-        if (index >= dialogueData.length) return;
+        if (index >= dialogueData.length) {
+            setCurrentIndex(index); // Show "script complete"
+            return;
+        }
+
+        // Clear previous timers
+        if (gapTimerRef.current) clearInterval(gapTimerRef.current);
+        if (dialogueTimerRef.current) clearTimeout(dialogueTimerRef.current);
+
         setCurrentIndex(index);
         const item = dialogueData[index];
         const gapSeconds = Math.ceil(item.gapMs / 1000);
+        setTotalGapSeconds(gapSeconds);
         setGapCountdown(gapSeconds);
 
         let remaining = gapSeconds;
         gapTimerRef.current = setInterval(() => {
             remaining -= 1;
             setGapCountdown(remaining);
-            if (remaining <= 0) clearInterval(gapTimerRef.current);
+            if (remaining <= 0) {
+                clearInterval(gapTimerRef.current);
+                gapTimerRef.current = null;
+            }
         }, 1000);
 
         dialogueTimerRef.current = setTimeout(() => {
@@ -61,6 +75,7 @@ export default function CabCallScreen({ visible, dialogueData = [], onEndCall })
     const s = (callDuration % 60).toString().padStart(2, '0');
     const currentDialogue = dialogueData[currentIndex];
     const nextDialogue = dialogueData[currentIndex + 1];
+    const progressPercent = totalGapSeconds > 0 ? (gapCountdown / totalGapSeconds) * 100 : 0;
 
     return (
         <View style={styles.container}>
@@ -75,26 +90,19 @@ export default function CabCallScreen({ visible, dialogueData = [], onEndCall })
 
             {/* Subtitle Area */}
             <View style={styles.subtitleArea}>
-                {currentDialogue && (
+                {currentDialogue && currentIndex < dialogueData.length && (
                     <View style={styles.currentCard}>
                         <Text style={styles.cardLabel}>They say:</Text>
                         <Text style={styles.cardText}>"{currentDialogue.dialogue}"</Text>
                     </View>
                 )}
 
-                {gapCountdown > 0 && (
+                {gapCountdown > 0 && currentIndex < dialogueData.length && (
                     <View style={styles.gapWrap}>
                         <Text style={styles.gapText}>Your turn — {gapCountdown}s</Text>
                         <View style={styles.gapBar}>
                             <View
-                                style={[
-                                    styles.gapBarFill,
-                                    {
-                                        width: currentDialogue
-                                            ? `${(gapCountdown / (currentDialogue.gapMs / 1000)) * 100}%`
-                                            : '0%',
-                                    },
-                                ]}
+                                style={[styles.gapBarFill, { width: `${progressPercent}%` }]}
                             />
                         </View>
                     </View>
