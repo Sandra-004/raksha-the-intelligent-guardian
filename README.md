@@ -204,6 +204,8 @@ We view AI not as a creator, but as a powerful tool that allowed us to focus mor
 
 ---
 
+##RELEASE-MOBILE APP
+**Android APK Release:**
 
 ## License
 
